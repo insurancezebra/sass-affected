@@ -1,0 +1,15 @@
+[ignore]
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+sharedmemory.hash_table_pow=21
+
+[version]
+0.68.0
+
+[strict]

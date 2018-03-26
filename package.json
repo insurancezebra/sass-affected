@@ -1,26 +1,41 @@
 {
   "name": "sass-affected",
   "version": "0.1.0",
-  "description": "Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.",
-  "main": "lib/index.js",
-  "scripts": {
-    "test": "jest"
+  "description":
+    "Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.",
+  "keywords": ["diff", "html", "regression", "sass", "test"],
+  "homepage": "https://github.com/insurancezebra/sass-affected#readme",
+  "bugs": {
+    "url": "https://github.com/insurancezebra/sass-affected/issues"
   },
+  "license": "ISC",
+  "author": "John Apostol <notimetobeidle@gmail.com>",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/insurancezebra/sass-affected.git"
   },
-  "keywords": [
-    "sass",
-    "html",
-    "regression",
-    "diff",
-    "test"
-  ],
-  "author": "John Apostol <notimetobeidle@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/insurancezebra/sass-affected/issues"
+  "scripts": {
+    "precommit": "lint-staged",
+    "test": "jest"
   },
-  "homepage": "https://github.com/insurancezebra/sass-affected#readme"
+  "dependencies": {
+    "sass-graph": "^2.2.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "flow-bin": "0.68.0",
+    "husky": "^0.14.3",
+    "jest": "^22.4.3",
+    "lint-staged": "^7.0.0",
+    "prettier": "1.11.1"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
+  }
 }
