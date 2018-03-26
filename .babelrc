@@ -1,12 +1,7 @@
 {
-  "presets": [
-    ["env", {
-      "targets": {
-        "targets": {
-          "node": "4.7"
-        }
-      }
-    }],
-    "flow"
-  ]
+  "env": {
+    "test": {
+      "presets": [["env"]]
+    }
+  }
 }

@@ -8,6 +8,7 @@
   "bugs": {
     "url": "https://github.com/insurancezebra/sass-affected/issues"
   },
+  "files": ["dist"],
   "license": "ISC",
   "author": "John Apostol <notimetobeidle@gmail.com>",
   "main": "lib/index.js",
@@ -16,16 +17,22 @@
     "url": "git+https://github.com/insurancezebra/sass-affected.git"
   },
   "scripts": {
-    "precommit": "lint-staged",
-    "test": "jest"
+    "build": "bili",
+    "clean": "rimraf dist",
+    "precommit": "npm run rebuild && npm run test-coverage && lint-staged",
+    "rebuild": "npm run clean && npm run build",
+    "test": "jest",
+    "test-coverage": "jest --coverage --no-cache --maxWorkers=6 --silent"
   },
   "dependencies": {
     "sass-graph": "^2.2.4"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.2",
+    "@babel/core": "^7.0.0-beta.42",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^22.4.3",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-flow": "^6.23.0",
+    "bili": "^3.0.13",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
@@ -33,9 +40,15 @@
     "husky": "^0.14.3",
     "jest": "^22.4.3",
     "lint-staged": "^7.0.0",
-    "prettier": "1.11.1"
+    "prettier": "1.11.1",
+    "rimraf": "^2.6.2"
   },
   "lint-staged": {
     "*.{js,json,css,md}": ["prettier --write", "git add"]
+  },
+  "jest": {
+    "collectCoverageFrom": ["src/**/*.js", "!**/node_modules/**"],
+    "coverageDirectory": "coverage",
+    "notify": true
   }
 }
