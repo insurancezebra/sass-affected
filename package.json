@@ -1,0 +1,26 @@
+{
+  "name": "sass-affected",
+  "version": "0.1.0",
+  "description": "Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/insurancezebra/sass-affected.git"
+  },
+  "keywords": [
+    "sass",
+    "html",
+    "regression",
+    "diff",
+    "test"
+  ],
+  "author": "John Apostol <notimetobeidle@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/insurancezebra/sass-affected/issues"
+  },
+  "homepage": "https://github.com/insurancezebra/sass-affected#readme"
+}
