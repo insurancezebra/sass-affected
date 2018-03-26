@@ -1,7 +1,7 @@
 // @flow
 
-import sassGraph from "sass-graph";
+import { parseDir } from "sass-graph";
 
-console.log(sassGraph);
-
-export default () => {};
+export default () => {
+  console.log(JSON.stringify(parseDir(`mocks`), null, 2));
+};
