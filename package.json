@@ -19,8 +19,7 @@
   "scripts": {
     "build": "bili",
     "clean": "rimraf dist",
-    "precommit": "npm run rebuild && npm run test-coverage && lint-staged",
-    "rebuild": "npm run clean && npm run build",
+    "precommit": "npm run build && npm run test-coverage && lint-staged",
     "test": "jest",
     "test-coverage": "jest --coverage --no-cache --maxWorkers=6 --silent"
   },
