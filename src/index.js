@@ -2,6 +2,6 @@
 
 import { parseDir } from "sass-graph";
 
-export default () => {
-  console.log(JSON.stringify(parseDir(`mocks`), null, 2));
+export default (sassDir: string, changedFiles: string[]) => {
+  console.log(JSON.stringify(parseDir(sassDir), null, 2));
 };

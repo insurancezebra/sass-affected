@@ -1,13 +1,9 @@
 "use strict";
 
-function _interopDefault(ex) {
-  return ex && typeof ex === "object" && "default" in ex ? ex["default"] : ex;
-}
+var sassGraph = require("sass-graph");
 
-var sassGraph = _interopDefault(require("sass-graph"));
-
-// @flow
-console.log(sassGraph);
-var index = () => {};
+var index = (sassDir, changedFiles) => {
+  console.log(JSON.stringify(sassGraph.parseDir(sassDir), null, 2));
+};
 
 module.exports = index;
