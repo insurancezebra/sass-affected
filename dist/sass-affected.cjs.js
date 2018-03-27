@@ -23,10 +23,11 @@ var index = ((sassDir, changedFiles) => {
     loadPaths
   } = sassGraph.parseDir(sassDir);
   const [path] = loadPaths;
-  const roots = changedFiles // Add path in order to match manifest keys
+  const roots = [// Deduplicate
+  ...new Set(changedFiles // Add path in order to match manifest keys
   .map(file => `${path}/${file}`) // Find root files
-  .reduce((acc, curr) => findRoots(manifest, curr), []) // Remove path
-  .map(file => file.split(`${path}/`)[1]);
+  .map(filePath => findRoots(manifest, filePath)).reduce((acc, curr) => [...acc, ...curr], []) // Remove path
+  .map(file => file.split(`${path}/`)[1]))];
   return roots;
 });
 

@@ -30,13 +30,19 @@ export default (sassDir: string, changedFiles: string[]) => {
   const { index: manifest, loadPaths } = sassGraph.parseDir(sassDir);
   const [path] = loadPaths;
 
-  const roots = changedFiles
-    // Add path in order to match manifest keys
-    .map(file => `${path}/${file}`)
-    // Find root files
-    .reduce((acc, curr) => findRoots(manifest, curr), [])
-    // Remove path
-    .map(file => file.split(`${path}/`)[1]);
+  const roots = [
+    // Deduplicate
+    ...new Set(
+      changedFiles
+        // Add path in order to match manifest keys
+        .map(file => `${path}/${file}`)
+        // Find root files
+        .map(filePath => findRoots(manifest, filePath))
+        .reduce((acc, curr) => [...acc, ...curr], [])
+        // Remove path
+        .map(file => file.split(`${path}/`)[1])
+    )
+  ];
 
   return roots;
 };
