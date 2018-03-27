@@ -1,7 +1,9 @@
 // @flow
 
-import { parseDir } from "sass-graph";
+import sassGraph from "sass-graph";
 
 export default (sassDir: string, changedFiles: string[]) => {
-  console.log(JSON.stringify(parseDir(sassDir), null, 2));
+  const { index } = sassGraph.parseDir(sassDir);
+  console.log(changedFiles, index);
+  console.log(JSON.stringify(sassGraph.parseDir(sassDir), null, 2));
 };

@@ -1,6 +1,8 @@
-import module from "./index";
+// import module from "./index";
 
-it("works", () => {
-  module("mocks");
-  expect(1 + 1).toBe(2);
+describe("finds correct roots", () => {
+  it("when given a node through an intermediary", () => {
+    // expect(module("mocks", ["mocks/mixinA.scss"])).toBe(["mocks/rootA.scss"]);
+    expect(true).toBe(true);
+  });
 });

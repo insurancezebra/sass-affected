@@ -19,9 +19,12 @@
   "scripts": {
     "build": "bili",
     "clean": "rimraf dist",
-    "precommit": "npm run build && npm run test-coverage && lint-staged",
+    "lint": "eslint ./src",
+    "precommit":
+      "npm run lint && npm run type-check && npm run test-coverage && npm run build && lint-staged",
     "test": "jest",
-    "test-coverage": "jest --coverage --no-cache --maxWorkers=6 --silent"
+    "test-coverage": "jest --coverage --no-cache --maxWorkers=6 --silent",
+    "type-check": "flow check"
   },
   "dependencies": {
     "sass-graph": "^2.2.4"
@@ -31,10 +34,13 @@
     "@babel/preset-env": "^7.0.0-beta.42",
     "@babel/preset-flow": "^7.0.0-beta.42",
     "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.3",
     "bili": "^3.0.13",
     "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
     "flow-bin": "0.68.0",
     "husky": "^0.14.3",
@@ -44,11 +50,10 @@
     "rimraf": "^2.6.2"
   },
   "lint-staged": {
-    "*.{js,json,css,md}": ["prettier --write", "git add"]
+    "*.{js,json,md}": ["prettier --write", "git add"]
   },
   "jest": {
     "collectCoverageFrom": ["src/**/*.js", "!**/node_modules/**"],
-    "coverageDirectory": "coverage",
-    "notify": true
+    "coverageDirectory": "coverage"
   }
 }
