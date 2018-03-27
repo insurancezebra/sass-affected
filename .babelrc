@@ -1,0 +1,8 @@
+{
+  "presets": ["@babel/flow"],
+  "env": {
+    "test": {
+      "presets": [["@babel/env"]]
+    }
+  }
+}
