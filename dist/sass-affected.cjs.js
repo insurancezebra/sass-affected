@@ -4,12 +4,30 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var sassGraph = _interopDefault(require('sass-graph'));
 
+// Recursive
+const findRoots = (manifest, currentPath, roots = []) => {
+  const {
+    importedBy
+  } = manifest[currentPath];
+
+  if (importedBy.length) {
+    return importedBy.reduce((acc, curr) => [...acc, ...findRoots(manifest, curr)], roots);
+  }
+
+  return [currentPath];
+};
+
 var index = ((sassDir, changedFiles) => {
   const {
-    index
+    index: manifest,
+    loadPaths
   } = sassGraph.parseDir(sassDir);
-  console.log(changedFiles, index);
-  console.log(JSON.stringify(sassGraph.parseDir(sassDir), null, 2));
+  const [path] = loadPaths;
+  const roots = changedFiles // Add path in order to match manifest keys
+  .map(file => `${path}/${file}`) // Find root files
+  .reduce((acc, curr) => findRoots(manifest, curr), []) // Remove path
+  .map(file => file.split(`${path}/`)[1]);
+  return roots;
 });
 
 module.exports = index;
