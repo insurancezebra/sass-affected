@@ -2,9 +2,23 @@
 
 Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.
 
+## Why?
+
+One can use `sass-graph` as a CLI tool to find the ancestors of a SASS file. This will list every intermediary file as well as the root(s). `sass-affected` aims to show the root SASS file so that developers or QA teams can identify which templates are affected by changing any ol' SASS file in a project.
+
 ## Usage
 
-TBD
+Use it as a CLI tool:
+
+```sh
+sass-affected --dir src/scss --changed src/scss/helpers/_utils.scss src/scss/components/_header.scss
+```
+
+Add the following magic comment near the top of your root SASS files to customize the regression check message:
+
+```scss
+// sass-affected /homepage.html should be checked for regressions!
+```
 
 ## Developing
 
