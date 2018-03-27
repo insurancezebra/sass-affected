@@ -58,3 +58,10 @@ describe("with mixed roots", () => {
     ).toEqual(["mocks/rootA.scss", "mocks/rootB.scss", "mocks/rootC.scss"]);
   });
 });
+
+it("should throw when passing files that don't exist", () => {
+  const shouldThrow = () => {
+    sassAffected("mocks", ["mocks/mixinC.scss"]);
+  };
+  expect(shouldThrow).toThrow();
+});

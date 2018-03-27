@@ -25,7 +25,11 @@ var index = ((sassDir, changedFiles) => {
   const [path] = loadPaths;
   const roots = [// Deduplicate
   ...new Set(changedFiles // Add path in order to match manifest keys
-  .map(file => `${path}/${file}`) // Find root files
+  .map(file => `${path}/${file}`) // Check for missing files
+  .map(filePath => {
+    if (!manifest[filePath]) throw new Error(`sass-affected - File missing: ${filePath}`);
+    return filePath;
+  }) // Find root files
   .map(filePath => findRoots(manifest, filePath)).reduce((acc, curr) => [...acc, ...curr], []) // Remove path
   .map(file => file.split(`${path}/`)[1]))];
   return roots;
