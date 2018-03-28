@@ -1,6 +1,6 @@
 {
   "name": "sass-affected",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description":
     "Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.",
   "keywords": ["diff", "html", "regression", "sass", "test"],
