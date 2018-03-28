@@ -42,9 +42,8 @@ export default (sassDir: string, changedFiles: string[]) => {
             throw new Error(`sass-affected - File missing: ${filePath}`);
           return filePath;
         })
-        // Find root files
-        .map(filePath => findRoots(manifest, filePath))
-        .reduce((acc, curr) => [...acc, ...curr], [])
+        // Find root files and flatten the array
+        .reduce((acc, curr) => [...acc, ...findRoots(manifest, curr)], [])
         // Remove path
         .map(file => file.split(`${path}/`)[1])
     )
