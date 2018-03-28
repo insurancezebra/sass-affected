@@ -1,8 +1,4 @@
-'use strict';
-
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
-var sassGraph = _interopDefault(require('sass-graph'));
+import sassGraph from 'sass-graph';
 
 // Recursive
 const findRoots = (manifest, currentPath, roots = []) => {
@@ -35,4 +31,4 @@ var index = ((sassDir, changedFiles) => {
   return roots;
 });
 
-module.exports = index;
+export default index;
