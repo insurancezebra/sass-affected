@@ -15,10 +15,29 @@ The CLI tool is built to support Node 6.x runtimes. The Node library is exposed 
 Use it as a CLI tool:
 
 ```sh
-sass-affected --dir src/scss --changed src/scss/helpers/_utils.scss src/scss/components/_header.scss
+sass-affected --dir src/scss --changed src/scss/helpers/_utils.scss
 ```
 
-Add the following magic comment near the top of your root Sass files to customize the regression check message:
+Let the tool diff against a branch:
+
+```sh
+sass-affected --dir src/scss --branch master
+```
+
+As a Node library:
+
+```js
+import sassAffected from "sass-affected";
+
+// This returns a Promise
+sassAffected("mocks", ["mocks/rootA.scss"]).then(obj => {
+  // The output will be an array of roots with their corresponding message:
+  // [{ file, message }]
+  console.log(obj);
+});
+```
+
+Add the following magic comment to the top of your root Sass files to customize the regression check message:
 
 ```scss
 // sass-affected /homepage.html should be checked for regressions!
@@ -26,14 +45,16 @@ Add the following magic comment near the top of your root Sass files to customiz
 
 ## Developing
 
-* Run tests with `npm test`.
-* Before commit, various code checks are performed.
-  * Lint source with `eslint`.
-  * Perform type check on source with `flow`.
-  * Run tests with `jest`.
-  * Build library with `bili`.
-  * Format .js, .json, and .md files with `prettier`.
-  * Add all changed files to staged before commit.
+Before commit, various code checks are performed:
+
+* Lint source with `eslint`.
+* Perform type check on source with `flow`.
+* Run tests with `jest`.
+* Build library with `bili`.
+* Add all changed files to staged before commit.
+* Format `src/*.js` files with `prettier`.
+
+You are free and encouraged to perform these checks manually as you develop.
 
 ## Releasing
 

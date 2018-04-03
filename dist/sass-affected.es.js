@@ -1,6 +1,8 @@
+import firstline from 'firstline';
 import sassGraph from 'sass-graph';
 
-// Recursive
+const magicString = "// sass-affected "; // Recursive
+
 const findRoots = (manifest, currentPath, roots = []) => {
   const {
     importedBy
@@ -13,22 +15,44 @@ const findRoots = (manifest, currentPath, roots = []) => {
   return [currentPath];
 };
 
-var index = ((sassDir, changedFiles) => {
+const findMessage = async file => {
+  const possibleMsg = await firstline(file);
+
+  if (possibleMsg.startsWith(magicString)) {
+    return possibleMsg.substring(magicString.length);
+  }
+
+  return `sass-affected: ${file}`;
+};
+
+var index = (async (sassDir, changedFiles) => {
   const {
     index: manifest,
     loadPaths
   } = sassGraph.parseDir(sassDir);
   const [path] = loadPaths;
+  const missing = [];
   const roots = [// Deduplicate
   ...new Set(changedFiles // Add path in order to match manifest keys
   .map(file => `${path}/${file}`) // Check for missing files
-  .map(filePath => {
-    if (!manifest[filePath]) throw new Error(`sass-affected - File missing: ${filePath}`);
-    return filePath;
+  .filter(filePath => {
+    if (!manifest[filePath]) {
+      // eslint-disable-next-line no-console
+      missing.push(filePath);
+      return false;
+    }
+
+    return true;
   }) // Find root files and flatten the array
   .reduce((acc, curr) => [...acc, ...findRoots(manifest, curr)], []) // Remove path
-  .map(file => file.split(`${path}/`)[1]))];
-  return roots;
+  .map(file => file.split(`${path}/`)[1]))].map(async file => ({
+    file,
+    message: await findMessage(`${path}/${file}`)
+  }));
+  return {
+    roots: await Promise.all(roots),
+    missing
+  };
 });
 
 export default index;
