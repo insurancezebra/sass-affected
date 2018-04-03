@@ -1,14 +1,14 @@
 # sass-affected
 
-Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.
+Map Sass file changes to the root file(s) that are affected, helping create more efficient regression tests.
 
 ## Why?
 
-One can use `sass-graph` as a CLI tool to find the ancestors of a SASS file. This will list every intermediary file as well as the root(s). `sass-affected` aims to show the root SASS file so that developers or QA teams can identify which templates are affected by changing any ol' SASS file in a project.
+One can use `sass-graph` as a CLI tool to find the ancestors of a Sass file. This will list every intermediary file as well as the root(s). `sass-affected` aims to show the root Sass file so that developers or QA teams can identify which templates are affected by changing any ol' Sass file in a project.
 
 ## Requirements
 
-This library is exposed in CommonJS format for Node 6.x and in ES2015 format if you need to bundle it for other runtimes.
+The CLI tool is built to support Node 6.x runtimes. The Node library is exposed in CommonJS format for Node 6.x and in ES2015 format if you need to bundle it for other runtimes.
 
 ## Usage
 
@@ -18,7 +18,7 @@ Use it as a CLI tool:
 sass-affected --dir src/scss --changed src/scss/helpers/_utils.scss src/scss/components/_header.scss
 ```
 
-Add the following magic comment near the top of your root SASS files to customize the regression check message:
+Add the following magic comment near the top of your root Sass files to customize the regression check message:
 
 ```scss
 // sass-affected /homepage.html should be checked for regressions!

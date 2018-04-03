@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+/* eslint-disable */
+
+const yargs = require("yargs")
+  .usage("Usage: $0 --dir [directory] --changed [file]")
+  .example(
+    "$0 --dir src/scss --changed src/scss/helpers/_utils.scss",
+    "outputs the root file(s) affected by a change to _utils.scss"
+  )
+  .option("d", {
+    alias: "dir",
+    describe: "The directory where your Sass files are found",
+    type: "string"
+  })
+  .option("c", {
+    alias: "changed",
+    describe: "The Sass file(s) that have been changed",
+    type: "array"
+  })
+  .version()
+  .alias("v", "version")
+  .help()
+  .alias("h", "help")
+  .demandOption(["dir", "changed"]);
+
+const argv = yargs.argv;
+
+// if (argv._.length === 0) {
+//   yargs.showHelp();
+//   process.exit(1);
+// }
