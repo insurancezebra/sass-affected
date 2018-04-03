@@ -1,23 +1,19 @@
 {
   "name": "sass-affected",
   "version": "1.0.0",
-  "description": "Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.",
-  "keywords": [
-    "diff",
-    "html",
-    "regression",
-    "sass",
-    "test"
-  ],
+  "description":
+    "Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.",
+  "directories": {
+    "bin": "./bin"
+  },
+  "keywords": ["diff", "html", "regression", "sass", "test"],
   "homepage": "https://github.com/insurancezebra/sass-affected#readme",
   "bugs": {
     "url": "https://github.com/insurancezebra/sass-affected/issues"
   },
   "license": "ISC",
   "author": "John Apostol <notimetobeidle@gmail.com>",
-  "files": [
-    "dist"
-  ],
+  "files": ["bin", "dist"],
   "main": "dist/sass-affected.cjs.js",
   "module": "dist/sass-affected.es.js",
   "repository": {
@@ -27,7 +23,8 @@
   "scripts": {
     "build": "bili --format cjs,es --target node:6",
     "clean": "rimraf dist",
-    "precommit": "npm run lint && npm run type-check && npm run test-coverage && npm run build && git add dist && lint-staged",
+    "precommit":
+      "npm run lint && npm run type-check && npm run test-coverage && npm run build && git add dist && lint-staged",
     "lint": "eslint ./src",
     "test": "jest",
     "test-coverage": "jest --coverage --no-cache --maxWorkers=6 --silent",
@@ -58,16 +55,10 @@
     "rimraf": "^2.6.2"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.js",
-      "!**/node_modules/**"
-    ],
+    "collectCoverageFrom": ["src/**/*.js", "!**/node_modules/**"],
     "coverageDirectory": "coverage"
   },
   "lint-staged": {
-    "src/*.js": [
-      "prettier --write",
-      "git add"
-    ]
+    "src/*.js": ["prettier --write", "git add"]
   }
 }
