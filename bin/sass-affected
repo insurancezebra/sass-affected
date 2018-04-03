@@ -17,6 +17,10 @@ const yargs = require("yargs")
     describe: "The Sass file(s) that have been changed",
     type: "array"
   })
+  .option("json", {
+    describe: "Format output as JSON",
+    type: "boolean"
+  })
   .version()
   .alias("v", "version")
   .help()
@@ -25,7 +29,17 @@ const yargs = require("yargs")
 
 const argv = yargs.argv;
 
-// if (argv._.length === 0) {
-//   yargs.showHelp();
-//   process.exit(1);
-// }
+try {
+  const roots = require("../")(argv.dir, argv.changed);
+  if (argv.json) {
+    console.log(JSON.stringify(roots));
+  } else {
+    roots.forEach(root => {
+      console.log(`sass-affected: ${root}`);
+    });
+  }
+  process.exit(0);
+} catch (e) {
+  console.error(e.stack);
+  process.exit(1);
+}
