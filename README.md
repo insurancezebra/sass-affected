@@ -24,7 +24,7 @@ Let the tool diff against a branch:
 sass-affected --dir src/scss --branch master
 ```
 
-As a Node library:
+Use it as a Node library:
 
 ```js
 import sassAffected from "sass-affected";
