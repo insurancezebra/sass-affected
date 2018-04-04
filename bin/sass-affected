@@ -3,6 +3,7 @@
 
 const exec = require("child_process").exec;
 const yargs = require("yargs");
+const sassAffected = require("../");
 
 yargs
   .usage("Usage: $0 --dir [directory] --branch [git branch]")
@@ -75,7 +76,7 @@ try {
   }
 
   getChanged(argv).then(changed => {
-    require("../")(argv.dir, changed).then(output => {
+    sassAffected(argv.dir, changed).then(output => {
       if (argv.json) {
         console.log(JSON.stringify(output));
       } else {
