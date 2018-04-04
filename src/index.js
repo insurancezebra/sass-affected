@@ -1,5 +1,6 @@
 // @flow
 
+import firstline from "firstline";
 import sassGraph from "sass-graph";
 
 type Manifest = {
@@ -9,6 +10,18 @@ type Manifest = {
     modified: string
   }
 };
+
+type Root = {
+  file: string,
+  message: string
+};
+
+type Output = {
+  missing: string[],
+  roots: Root[]
+};
+
+const magicString = "// sass-affected ";
 
 // Recursive
 const findRoots = (
@@ -26,9 +39,21 @@ const findRoots = (
   return [currentPath];
 };
 
-export default (sassDir: string, changedFiles: string[]) => {
+const findMessage = async (file: string): Promise<string> => {
+  const possibleMsg = await firstline(file);
+  if (possibleMsg.startsWith(magicString)) {
+    return possibleMsg.substring(magicString.length);
+  }
+  return `sass-affected: ${file}`;
+};
+
+export default async (
+  sassDir: string,
+  changedFiles: string[]
+): Promise<Output> => {
   const { index: manifest, loadPaths } = sassGraph.parseDir(sassDir);
   const [path] = loadPaths;
+  const missing = [];
 
   const roots = [
     // Deduplicate
@@ -37,17 +62,27 @@ export default (sassDir: string, changedFiles: string[]) => {
         // Add path in order to match manifest keys
         .map(file => `${path}/${file}`)
         // Check for missing files
-        .map(filePath => {
-          if (!manifest[filePath])
-            throw new Error(`sass-affected - File missing: ${filePath}`);
-          return filePath;
+        .filter(filePath => {
+          if (!manifest[filePath]) {
+            // eslint-disable-next-line no-console
+            missing.push(filePath);
+
+            return false;
+          }
+          return true;
         })
         // Find root files and flatten the array
         .reduce((acc, curr) => [...acc, ...findRoots(manifest, curr)], [])
         // Remove path
         .map(file => file.split(`${path}/`)[1])
     )
-  ];
+  ].map(async file => ({
+    file,
+    message: await findMessage(`${path}/${file}`)
+  }));
 
-  return roots;
+  return {
+    roots: await Promise.all(roots),
+    missing
+  };
 };

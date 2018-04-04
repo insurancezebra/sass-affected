@@ -1,5 +1,6 @@
 {
   "presets": ["@babel/flow"],
+  "plugins": ["@babel/plugin-transform-async-to-generator"],
   "env": {
     "test": {
       "presets": [["@babel/env"]]

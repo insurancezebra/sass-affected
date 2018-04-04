@@ -1,0 +1,93 @@
+#!/usr/bin/env node
+/* eslint-disable */
+
+const exec = require("child_process").exec;
+const yargs = require("yargs");
+const sassAffected = require("../");
+
+yargs
+  .usage("Usage: $0 --dir [directory] --branch [git branch]")
+  .example(
+    "$0 --dir src/scss --branch master",
+    "Outputs root file(s) affected by committing current files into master."
+  )
+  .option("d", {
+    alias: "dir",
+    describe: "The directory where your Sass files are found",
+    type: "string"
+  })
+  .option("c", {
+    alias: "changed",
+    describe: "The Sass file(s) that have been changed",
+    type: "array"
+  })
+  .option("b", {
+    alias: "branch",
+    describe: "Use git to diff against a branch",
+    type: "string"
+  })
+  .option("json", {
+    describe: "Format output as JSON",
+    type: "boolean"
+  })
+  .conflicts({ changed: "branch", branch: "changed" })
+  .version()
+  .alias("v", "version")
+  .help()
+  .alias("h", "help")
+  .demandOption(["dir"]);
+
+const argv = yargs.argv;
+
+// Returns a Promise with the changed files
+const getChanged = args => {
+  if (args.branch) {
+    return new Promise((resolve, reject) => {
+      exec(
+        // Gets changed/added files between staged + HEAD and branch
+        `git --no-pager diff --name-only ${argv.branch}`,
+        (err, stdout, stderr) => {
+          if (err) {
+            console.error(err.stack);
+            process.exit(1);
+          }
+          if (stderr) {
+            console.error(stderr);
+            process.exit(1);
+          }
+
+          const changed = stdout
+            .split("\n")
+            .filter(file => file.endsWith(".scss") || file.endsWith(".sass"));
+
+          resolve(changed);
+        }
+      );
+    });
+  }
+
+  return Promise.resolve(args.changed);
+};
+
+try {
+  if (!argv.branch && !argv.changed) {
+    console.error("You must provide either --branch or --changed");
+    process.exit(1);
+  }
+
+  getChanged(argv).then(changed => {
+    sassAffected(argv.dir, changed).then(output => {
+      if (argv.json) {
+        console.log(JSON.stringify(output));
+      } else {
+        output.roots.forEach(root => {
+          console.log(root.message);
+        });
+      }
+      process.exit(0);
+    });
+  });
+} catch (e) {
+  console.error(e.stack);
+  process.exit(1);
+}

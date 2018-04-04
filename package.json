@@ -1,16 +1,27 @@
 {
   "name": "sass-affected",
   "version": "1.0.0",
-  "description":
-    "Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.",
-  "keywords": ["diff", "html", "regression", "sass", "test"],
+  "description": "Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.",
+  "directories": {
+    "bin": "./bin"
+  },
+  "keywords": [
+    "diff",
+    "html",
+    "regression",
+    "sass",
+    "test"
+  ],
   "homepage": "https://github.com/insurancezebra/sass-affected#readme",
   "bugs": {
     "url": "https://github.com/insurancezebra/sass-affected/issues"
   },
   "license": "ISC",
   "author": "John Apostol <notimetobeidle@gmail.com>",
-  "files": ["dist"],
+  "files": [
+    "bin",
+    "dist"
+  ],
   "main": "dist/sass-affected.cjs.js",
   "module": "dist/sass-affected.es.js",
   "repository": {
@@ -20,23 +31,26 @@
   "scripts": {
     "build": "bili --format cjs,es --target node:6",
     "clean": "rimraf dist",
-    "precommit":
-      "npm run lint && npm run type-check && npm run test-coverage && npm run build && git add dist && lint-staged",
+    "precommit": "npm run lint && npm run type-check && npm run test-coverage && npm run build && git add dist && lint-staged",
     "lint": "eslint ./src",
     "test": "jest",
     "test-coverage": "jest --coverage --no-cache --maxWorkers=6 --silent",
     "type-check": "flow check"
   },
   "dependencies": {
-    "sass-graph": "^2.2.4"
+    "firstline": "^1.2.1",
+    "sass-graph": "^2.2.4",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.42",
+    "@babel/plugin-transform-async-to-generator": "^7.0.0-beta.44",
     "@babel/preset-env": "^7.0.0-beta.42",
     "@babel/preset-flow": "^7.0.0-beta.42",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.3",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "bili": "^3.0.13",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -51,10 +65,16 @@
     "rimraf": "^2.6.2"
   },
   "jest": {
-    "collectCoverageFrom": ["src/**/*.js", "!**/node_modules/**"],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!**/node_modules/**"
+    ],
     "coverageDirectory": "coverage"
   },
   "lint-staged": {
-    "src/*.js": ["prettier --write", "git add"]
+    "src/*.js": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
