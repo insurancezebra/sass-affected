@@ -47,9 +47,9 @@ Add the following magic comment to the top of your root Sass files to customize 
 
 Before commit, various code checks are performed:
 
+* Run tests with `jest`.
 * Lint and format source with `eslint` and `prettier`.
 * Perform type check on source with `flow`.
-* Run tests with `jest`.
 * Build library with `bili`.
 * Add all changed files to staged before commit.
 

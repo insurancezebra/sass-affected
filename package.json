@@ -24,7 +24,7 @@
     "build": "bili --format cjs,es --target node:6",
     "clean": "rimraf dist",
     "precommit":
-      "npm run lint-fix && npm run type-check && npm run test-coverage && npm run build && git add dist src",
+      "npm run test-coverage && lint-staged && npm run type-check && npm run build && git add dist",
     "lint-fix": "eslint ./src --fix",
     "test": "jest",
     "test-coverage": "jest --coverage --no-cache --maxWorkers=6 --silent",
@@ -53,12 +53,15 @@
     "flow-bin": "0.68.0",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
-    "lint-staged": "^7.0.0",
+    "lint-staged": "^7.0.4",
     "prettier": "1.11.1",
     "rimraf": "^2.6.2"
   },
   "jest": {
     "collectCoverageFrom": ["src/**/*.js", "!**/node_modules/**"],
     "coverageDirectory": "coverage"
+  },
+  "lint-staged": {
+    "src/*.js": ["eslint --fix", "git add"]
   }
 }
