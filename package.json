@@ -1,27 +1,19 @@
 {
   "name": "sass-affected",
-  "version": "1.0.0",
-  "description": "Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.",
+  "version": "1.1.0",
+  "description":
+    "Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.",
   "directories": {
     "bin": "./bin"
   },
-  "keywords": [
-    "diff",
-    "html",
-    "regression",
-    "sass",
-    "test"
-  ],
+  "keywords": ["diff", "html", "regression", "sass", "test"],
   "homepage": "https://github.com/insurancezebra/sass-affected#readme",
   "bugs": {
     "url": "https://github.com/insurancezebra/sass-affected/issues"
   },
   "license": "ISC",
   "author": "John Apostol <notimetobeidle@gmail.com>",
-  "files": [
-    "bin",
-    "dist"
-  ],
+  "files": ["bin", "dist"],
   "main": "dist/sass-affected.cjs.js",
   "module": "dist/sass-affected.es.js",
   "repository": {
@@ -31,8 +23,9 @@
   "scripts": {
     "build": "bili --format cjs,es --target node:6",
     "clean": "rimraf dist",
-    "precommit": "npm run lint && npm run type-check && npm run test-coverage && npm run build && git add dist && lint-staged",
-    "lint": "eslint ./src",
+    "precommit":
+      "npm run test-coverage && lint-staged && npm run type-check && npm run build && git add dist",
+    "lint-fix": "eslint ./src --fix",
     "test": "jest",
     "test-coverage": "jest --coverage --no-cache --maxWorkers=6 --silent",
     "type-check": "flow check"
@@ -60,21 +53,15 @@
     "flow-bin": "0.68.0",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
-    "lint-staged": "^7.0.0",
+    "lint-staged": "^7.0.4",
     "prettier": "1.11.1",
     "rimraf": "^2.6.2"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.js",
-      "!**/node_modules/**"
-    ],
+    "collectCoverageFrom": ["src/**/*.js", "!**/node_modules/**"],
     "coverageDirectory": "coverage"
   },
   "lint-staged": {
-    "src/*.js": [
-      "prettier --write",
-      "git add"
-    ]
+    "src/*.js": ["eslint --fix", "git add"]
   }
 }
