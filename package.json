@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "firstline": "^1.3.0",
-    "sass-graph": "^2.2.4",
+    "sass-graph": "^3.0.0",
     "yargs": "^11.1.0"
   },
   "devDependencies": {
