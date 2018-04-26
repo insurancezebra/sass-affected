@@ -12,7 +12,9 @@ The CLI tool is built to support Node 6.x runtimes. The Node library is exposed 
 
 ## Usage
 
-Use it as a CLI tool:
+This tool only finds root Sass files. It is not wired up to version control, CI, or any sort of build process out of the box. You will have to integrate it into your teams processes to get any benefit.
+
+### Use it as a CLI tool
 
 ```sh
 sass-affected --dir src/scss --changed src/scss/helpers/_utils.scss
@@ -21,10 +23,10 @@ sass-affected --dir src/scss --changed src/scss/helpers/_utils.scss
 Let the tool diff against a branch:
 
 ```sh
-sass-affected --dir src/scss --branch master
+sass-affected --dir src/scss --branch origin/master
 ```
 
-Use it as a Node library:
+### Use it as a Node library
 
 ```js
 import sassAffected from "sass-affected";
@@ -54,8 +56,3 @@ Before commit, various code checks are performed:
 * Add all changed files to staged before commit.
 
 You are free and encouraged to perform these checks manually as you develop.
-
-## Releasing
-
-* Before merging into master, bump up the version according to [semver](https://semver.org/) rules and make a release in Github.
-* Consuming applications should reference that release in their `package.json` like this: `"sass-affected": "ssh://github.com/insurancezebra/sass-affected.git#1.2.3`.
