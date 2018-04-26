@@ -1,5 +1,5 @@
 {
-  "name": "sass-affected",
+  "name": "@thezebra/sass-affected",
   "version": "1.1.0",
   "description":
     "Map SASS file changes to the root file(s) that are affected, helping create more efficient regression tests.",
