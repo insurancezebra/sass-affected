@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with mixed roots works with duplicate roots 1`] = `
+Object {
+  "missing": Array [],
+  "roots": Array [
+    Object {
+      "file": "mocks/rootA.scss",
+      "message": "There's a change in rootA.scss!",
+    },
+    Object {
+      "file": "mocks/rootB.scss",
+      "message": "There's a change in rootB.scss!",
+    },
+    Object {
+      "file": "mocks/rootC.scss",
+      "message": "There's a change in rootC.scss!",
+    },
+  ],
+}
+`;
+
+exports[`with mixed roots works with leaf nodes 1`] = `
+Object {
+  "missing": Array [],
+  "roots": Array [
+    Object {
+      "file": "mocks/rootA.scss",
+      "message": "There's a change in rootA.scss!",
+    },
+    Object {
+      "file": "mocks/rootB.scss",
+      "message": "There's a change in rootB.scss!",
+    },
+    Object {
+      "file": "mocks/rootC.scss",
+      "message": "There's a change in rootC.scss!",
+    },
+  ],
+}
+`;
+
+exports[`with multiple roots works with a leaf node imported through an intermediary 1`] = `
+Object {
+  "missing": Array [],
+  "roots": Array [
+    Object {
+      "file": "mocks/rootB.scss",
+      "message": "There's a change in rootB.scss!",
+    },
+    Object {
+      "file": "mocks/rootC.scss",
+      "message": "There's a change in rootC.scss!",
+    },
+  ],
+}
+`;
+
+exports[`with multiple roots works with a node imported by the root 1`] = `
+Object {
+  "missing": Array [],
+  "roots": Array [
+    Object {
+      "file": "mocks/rootB.scss",
+      "message": "There's a change in rootB.scss!",
+    },
+    Object {
+      "file": "mocks/rootC.scss",
+      "message": "There's a change in rootC.scss!",
+    },
+  ],
+}
+`;
+
+exports[`with multiple roots works with duplicate roots 1`] = `
+Object {
+  "missing": Array [],
+  "roots": Array [
+    Object {
+      "file": "mocks/rootB.scss",
+      "message": "There's a change in rootB.scss!",
+    },
+    Object {
+      "file": "mocks/rootC.scss",
+      "message": "There's a change in rootC.scss!",
+    },
+  ],
+}
+`;
+
+exports[`works with a leaf node imported through an intermediary 1`] = `
+Object {
+  "missing": Array [],
+  "roots": Array [
+    Object {
+      "file": "mocks/rootA.scss",
+      "message": "There's a change in rootA.scss!",
+    },
+  ],
+}
+`;
+
+exports[`works with a node imported by the root 1`] = `
+Object {
+  "missing": Array [],
+  "roots": Array [
+    Object {
+      "file": "mocks/rootA.scss",
+      "message": "There's a change in rootA.scss!",
+    },
+  ],
+}
+`;
+
+exports[`works with a node that is the root 1`] = `
+Object {
+  "missing": Array [],
+  "roots": Array [
+    Object {
+      "file": "mocks/rootA.scss",
+      "message": "There's a change in rootA.scss!",
+    },
+  ],
+}
+`;
