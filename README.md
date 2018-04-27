@@ -45,14 +45,8 @@ Add the following magic comment to the top of your root Sass files to customize 
 // sass-affected /homepage.html should be checked for regressions!
 ```
 
-## Developing
+## Contributing
 
-Before commit, various code checks are performed:
+sass-affected is meant to be used as a helpful library in a team's development and QA process. The most helpful contributions are separate modules, scripts, etc that allow development and QA teams to integrate the helpful regression messages without extra work. That said, if you have suggestions and improvements to this library, please feel welcome!
 
-* Run tests with `jest`.
-* Lint and format source with `eslint` and `prettier`.
-* Perform type check on source with `flow`.
-* Build library with `bili`.
-* Add all changed files to staged before commit.
-
-You are free and encouraged to perform these checks manually as you develop.
+See our [contributing guide](/CONTRIBUTING.md) for details.
