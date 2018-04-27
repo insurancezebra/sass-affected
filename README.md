@@ -10,6 +10,20 @@ One can use `sass-graph` as a CLI tool to find the ancestors of a Sass file. Thi
 
 The CLI tool is built to support Node 6.x runtimes. The Node library is exposed in CommonJS format for Node 6.x and in ES2015 format if you need to bundle it for other runtimes.
 
+## Installation
+
+With npm:
+
+```
+$ npm install @thezebra/sass-affected --save-dev
+```
+
+With yarn:
+
+```
+$ yarn add @thezebra/sass-affected --dev
+```
+
 ## Usage
 
 This tool only finds root Sass files. It is not wired up to version control, CI, or any sort of build process out of the box. You will have to integrate it into your teams processes to get any benefit.
