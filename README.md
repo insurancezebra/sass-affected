@@ -10,9 +10,25 @@ One can use `sass-graph` as a CLI tool to find the ancestors of a Sass file. Thi
 
 The CLI tool is built to support Node 6.x runtimes. The Node library is exposed in CommonJS format for Node 6.x and in ES2015 format if you need to bundle it for other runtimes.
 
+## Installation
+
+With npm:
+
+```
+$ npm install @thezebra/sass-affected --save-dev
+```
+
+With yarn:
+
+```
+$ yarn add @thezebra/sass-affected --dev
+```
+
 ## Usage
 
-Use it as a CLI tool:
+This tool only finds root Sass files. It is not wired up to version control, CI, or any sort of build process out of the box. You will have to integrate it into your teams processes to get any benefit.
+
+### Use it as a CLI tool
 
 ```sh
 sass-affected --dir src/scss --changed src/scss/helpers/_utils.scss
@@ -21,10 +37,10 @@ sass-affected --dir src/scss --changed src/scss/helpers/_utils.scss
 Let the tool diff against a branch:
 
 ```sh
-sass-affected --dir src/scss --branch master
+sass-affected --dir src/scss --branch origin/master
 ```
 
-Use it as a Node library:
+### Use it as a Node library
 
 ```js
 import sassAffected from "sass-affected";
@@ -43,19 +59,8 @@ Add the following magic comment to the top of your root Sass files to customize 
 // sass-affected /homepage.html should be checked for regressions!
 ```
 
-## Developing
+## Contributing
 
-Before commit, various code checks are performed:
+sass-affected is meant to be used as a helpful library in a team's development and QA process. The most helpful contributions are separate modules, scripts, etc that allow development and QA teams to integrate the helpful regression messages without extra work. That said, if you have suggestions and improvements to this library, please feel welcome!
 
-* Run tests with `jest`.
-* Lint and format source with `eslint` and `prettier`.
-* Perform type check on source with `flow`.
-* Build library with `bili`.
-* Add all changed files to staged before commit.
-
-You are free and encouraged to perform these checks manually as you develop.
-
-## Releasing
-
-* Before merging into master, bump up the version according to [semver](https://semver.org/) rules and make a release in Github.
-* Consuming applications should reference that release in their `package.json` like this: `"sass-affected": "ssh://github.com/insurancezebra/sass-affected.git#1.2.3`.
+See our [contributing guide](/CONTRIBUTING.md) for details.
